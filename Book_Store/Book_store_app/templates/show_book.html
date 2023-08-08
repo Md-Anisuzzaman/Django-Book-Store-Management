@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+  <h3 class="text-center p-3">Book Store Management</h3>
+{% if data %}
+<table class="table table-bordered mx-auto" style="width: 80%;">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>First Publication</th>
+        <th>Last Edited</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.book_name }}</td>
+          <td>{{ item.author }}</td>
+          <td>{{ item.first_sub }}</td>
+          <td>{{ item.last_sub }}</td>
+          <td>
+             <a href="{% url 'createbookpage' %}"><button type="submit" class="btn btn-primary btn-sm">Create</button></a>
+             <a href="{% url 'editbookpage' id=item.id %}"><button type="submit" class="btn btn-success btn-sm">Edit</button></a>
+             <a href="{% url 'deletebookpage' id=item.id %}"><button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <h3 class="text-center text-warning">Data not avaiable now</h3>
+  {% endif %}
+{% endblock %}
